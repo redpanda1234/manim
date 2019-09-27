@@ -272,7 +272,7 @@ class ConstructAll(Scene):
         l41_b = TextMobject("$K_{(4,1)}$")
         l51_b = TextMobject("$K_{(5,1)}$")
         l52_b = TextMobject("$K_{(5,2)}$")
-        l61_b = TextMobject("$K_{(6_1)}$")
+        l61_b = TextMobject("$K_{(6,1)}$")
         l62_b = TextMobject("$K_{(6,2)}$")
         l63_b = TextMobject("$K_{(6,3)}$")
         l71_b = TextMobject("$K_{(7,1)}$")
@@ -288,7 +288,7 @@ class ConstructAll(Scene):
         l41_b.set_color(col_4)
 
         l51_b.set_color(col_5)
-        l51_b.set_color(col_5)
+        l52_b.set_color(col_5)
 
         l61_b.set_color(col_6)
         l62_b.set_color(col_6)
@@ -301,8 +301,26 @@ class ConstructAll(Scene):
         l75_b.set_color(col_7)
         l76_b.set_color(col_7)
 
-        yspace = 2.5
-        yshift = 0.5
+        # scaling
+
+        text_scale = 0.6
+
+        l31_b.scale(text_scale)
+        l41_b.scale(text_scale)
+        l51_b.scale(text_scale)
+        l52_b.scale(text_scale)
+        l61_b.scale(text_scale)
+        l62_b.scale(text_scale)
+        l63_b.scale(text_scale)
+        l71_b.scale(text_scale)
+        l72_b.scale(text_scale)
+        l73_b.scale(text_scale)
+        l74_b.scale(text_scale)
+        l75_b.scale(text_scale)
+        l76_b.scale(text_scale)
+
+        yspace = 2.75
+        yshift = 0.25
 
         data = [
             (k31, c31, 4.5 * LEFT + (yspace + yshift) * UP, l31_a, l31_b),
@@ -331,13 +349,13 @@ class ConstructAll(Scene):
         for k, c, thisshift, atext, btext in data:
             k.shift(thisshift)
             c.shift(thisshift)
-            atext.shift(thisshift + 1.25 * DOWN)
-            btext.shift(thisshift + 1.25 * DOWN)
+            atext.shift(thisshift + 1.1 * DOWN)
+            btext.shift(thisshift + 1.1 * DOWN)
         # data = data[:-1]
         # data = data +
-        toplay = [ShowCreation(c, run_time=2) for _, c, _, _, _ in data] + [
-            ShowCreation(atext) for _, _, _, atext, _ in data
-        ]
+        toplay = [ShowCreation(c, run_time=2) for _, c, _, _, _ in data]  # + [
+        #     ShowCreation(atext) for _, _, _, atext, _ in data
+        # ]
         # print(toplay)
         # self.play(ShowCreation(c31), ShowCreation(c41), ShowCreation(c51))
         self.play(*toplay)
@@ -345,10 +363,13 @@ class ConstructAll(Scene):
         self.wait(2)
 
         totransform = [
-            Transform(c, k, run_time=4, rate_func=smooth) for k, c, _, _, _ in data
-        ] + [Transform(atext, btext, run_time=2) for _, _, _, atext, btext in data]
+            Transform(c, k, run_time=5, rate_func=smooth) for k, c, _, _, _ in data
+        ]
+
+        labels = [FadeIn(btext, run_time=2) for _, _, _, _, btext in data]
 
         self.play(*totransform)
+        self.play(*labels)
         self.wait()
         # self.play(Transform(circle, start_knot, run_time=5))
         # self.play(FadeIn(mygaps))
