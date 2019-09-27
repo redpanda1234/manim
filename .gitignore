@@ -16,7 +16,9 @@ ben_cairo_test.py
 .vs
 *.xml
 *.iml
-media
+media/*
+!media/designs/
+media/designs/svg_images/*.gif
 manim.sublime-project
 manim.sublime-workspace
 .eggs/

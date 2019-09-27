@@ -83,7 +83,7 @@ class unjoinedKnot(SVGMobject):
 class Gaps(SVGMobject):
     CONFIG = {
         "color": BLUE_E,
-        "file_name_prefix": "gaps",
+        "file_name_prefix": "7_2_gaps",
         "stroke_width": 5,
         "stroke_color": BLACK,
         "fill_opacity": 0.0,
@@ -109,15 +109,15 @@ class Construct72(Scene):
     def construct(self):
         start_knot = joinedKnot()
         # end_knot = unjoinedKnot()
-        # mygaps = Gaps()
-        # mygaps.shift(0.083 * DOWN + 0.11 * RIGHT)
-        # waving_man = testKnot("wave")
+        mygaps = Gaps()
+        mygaps.shift(0.083 * DOWN + 0.11 * RIGHT)
 
         circle = Circle(radius=2.5)
 
         self.play(ShowCreation(circle))
         self.play(Transform(circle, start_knot, run_time=5))
-        # self.play(FadeIn(mygaps))
+        self.play(FadeIn(mygaps, run_time=1))
+        self.wait(2)
 
 
 class Construct31(Scene):
@@ -351,15 +351,11 @@ class ConstructAll(Scene):
             c.shift(thisshift)
             atext.shift(thisshift + 1.1 * DOWN)
             btext.shift(thisshift + 1.1 * DOWN)
-        # data = data[:-1]
-        # data = data +
+
         toplay = [ShowCreation(c, run_time=2) for _, c, _, _, _ in data]  # + [
-        #     ShowCreation(atext) for _, _, _, atext, _ in data
-        # ]
-        # print(toplay)
-        # self.play(ShowCreation(c31), ShowCreation(c41), ShowCreation(c51))
+
         self.play(*toplay)
-        # self.play(*[ShowCreation(c) for _, c_, _ in data])
+
         self.wait(2)
 
         totransform = [
@@ -370,6 +366,6 @@ class ConstructAll(Scene):
 
         self.play(*totransform)
         self.play(*labels)
-        self.wait()
+        self.wait(2)
         # self.play(Transform(circle, start_knot, run_time=5))
         # self.play(FadeIn(mygaps))
