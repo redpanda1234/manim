@@ -120,6 +120,119 @@ class Construct72(Scene):
         self.wait(2)
 
 
+class Construct72Line(Scene):
+    def construct(self):
+        start_knot = joinedKnot()
+        # end_knot = unjoinedKnot()
+        mygaps = Gaps()
+        mygaps.shift(0.083 * DOWN + 0.11 * RIGHT)
+
+        # circle = Circle(radius=2.5)
+        line = Line(np.array([-3, 0, 0]), np.array([3, 0, 0]))
+        # line2 = Line(np.array([-5, 0, -1]), np.array([-2, 0, -1]), stroke_color=BLACK)
+
+        self.play(ShowCreation(line))
+        self.play(Transform(line, start_knot, run_time=4))
+        self.play(FadeIn(mygaps, run_time=1))
+        self.wait(2)
+
+
+class Construct72CommDiag(Scene):
+    def construct(self):
+        #######################################################
+        # Scale the stuff up top
+        scalefac = 0.4
+
+        # Define the top shift value
+        tshift = 4 * LEFT + 2.5 * UP
+
+        # Instantiate
+        start_knot = joinedKnot(stroke_color=BLUE_C)
+        start_knot_b = joinedKnot(stroke_color=YELLOW_D)
+        tgaps = Gaps()
+        bgaps = Gaps()
+        tline = Line(np.array([-4, 0, 0]), np.array([2, 0, 0]))
+        tlrcopy = Line(np.array([-4, 0, 0]), np.array([2, 0, 0]), stroke_color=BLUE_C)
+        tlbcopy = Line(np.array([-4, 0, 0]), np.array([2, 0, 0]), stroke_color=RED_C)
+
+        # Instantiate Lower stuff
+        bcircle = Circle(radius=1)
+        bcircle.shift(1.8 * DOWN)
+
+        # Add dots in
+        testdot = Dot()
+        testdot2 = Dot()
+        testdot3 = Dot()
+
+        start_knot.add(testdot)
+        bcircle.add(testdot2)
+        start_knot_b.add(testdot3)
+
+        # Arrows
+        tarrow = Arrow(tshift + 1 * RIGHT, tshift + 7 * RIGHT, stroke_color=BLUE_C)
+        blarrow = Arrow(
+            tshift + 0.71 * RIGHT + 0.71 * DOWN,
+            1.8 * DOWN + 0.71 * LEFT + 0.71 * UP,
+            stroke_color=RED_C,
+        )
+
+        brarrow = Arrow(
+            1.8 * DOWN + 0.71 * RIGHT + 1 * UP,
+            tshift + 1 * DOWN + 1 * LEFT + 8 * RIGHT,
+            stroke_color=YELLOW_C,
+        )
+
+        # Apply the appropriate scalings
+        tgaps.shift((0.083 * DOWN + 0.11 * RIGHT) * scalefac)
+        bgaps.shift((0.083 * DOWN + 0.11 * RIGHT) * scalefac)
+        start_knot.scale(scalefac)
+        start_knot_b.scale(scalefac)
+        tgaps.scale(scalefac)
+        bgaps.scale(scalefac)
+        tline.scale(scalefac)
+        tlrcopy.scale(scalefac)
+        tlbcopy.scale(scalefac)
+
+        # Apply the shifts
+        start_knot.shift(tshift + 8 * RIGHT)
+        start_knot_b.shift(tshift + 8 * RIGHT)
+        tgaps.shift(tshift + 8 * RIGHT)
+        bgaps.shift(tshift + 8 * RIGHT)
+        tline.shift(tshift)
+        tlrcopy.shift(tshift)
+        tlbcopy.shift(tshift)
+
+        tlabel = TextMobject(r"$L_{(7,2)}$")
+        tlabel.shift(3 * UP)
+        tlabel.set_color(BLUE_C)
+
+        bllabel = TextMobject(r"$\sim/\{0,1\}$")
+        bllabel.shift(0.125 * DOWN + 3 * LEFT)
+        bllabel.set_color(RED_C)
+
+        brlabel = TextMobject(r"$K_{(7,2)}$")
+        brlabel.shift(0.125 * DOWN + 2.5 * RIGHT)
+        brlabel.set_color(YELLOW_D)
+
+        self.play(ShowCreation(tline))
+        self.play(Transform(tlrcopy, start_knot, run_time=2.5))
+        self.play(FadeIn(tgaps, run_time=0.5))
+        self.play(Transform(tlbcopy, bcircle, run_time=2.5))
+        self.play(Transform(bcircle, start_knot_b, run_time=2.5))
+        self.play(FadeIn(bgaps, run_time=0.5))
+
+        self.wait(1)
+
+        self.play(
+            *[
+                ShowCreation(a)
+                for a in [blarrow, brarrow, tarrow, tlabel, bllabel, brlabel]
+            ]
+        )
+
+        self.wait(2)
+
+
 class Construct31(Scene):
     def construct(self):
         start_knot = joinedKnot(knot_fname="3_1")
