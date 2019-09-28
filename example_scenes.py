@@ -159,14 +159,26 @@ class Construct72CommDiag(Scene):
         bcircle = Circle(radius=1)
         bcircle.shift(1.8 * DOWN)
 
-        # Add dots in
-        testdot = Dot()
-        testdot2 = Dot()
-        testdot3 = Dot()
+        # # Add dots in
+        # zdot = Dot()
+        # zdot.shift(4 * LEFT)
+        # odot = Dot()
+        # odot.shift(2 * RIGHT)
+        # tline.add(zdot)
+        # tline.add(odot)
 
-        start_knot.add(testdot)
-        bcircle.add(testdot2)
-        start_knot_b.add(testdot3)
+        # bcdot = Dot(color=RED_C)
+        # bcdot2 = Dot(color=RED_C)
+        # bcdot.shift(1.8 * DOWN, 1 * RIGHT)
+        # bcdot2.shift(1.8 * DOWN, 1 * RIGHT)
+        # bcircle.add(bcdot)
+        # bcircle.add(bcdot2)
+
+        # rdot = Dot()
+        # rdot.shift(0.5 * DOWN + 0.5 * LEFT)
+
+        # start_knot.add(rdot)
+        # start_knot_b.add_to_back(rdot)
 
         # Arrows
         tarrow = Arrow(tshift + 1 * RIGHT, tshift + 7 * RIGHT, stroke_color=BLUE_C)
@@ -213,6 +225,9 @@ class Construct72CommDiag(Scene):
         brlabel = TextMobject(r"$K_{(7,2)}$")
         brlabel.shift(0.125 * DOWN + 2.5 * RIGHT)
         brlabel.set_color(YELLOW_D)
+
+        for myobj in [bcircle, tline, tlrcopy, tlbcopy, start_knot, start_knot_b]:
+            myobj.update()
 
         self.play(ShowCreation(tline))
         self.play(Transform(tlrcopy, start_knot, run_time=2.5))
