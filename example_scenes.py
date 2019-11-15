@@ -214,11 +214,11 @@ class Construct72CommDiag(Scene):
         tlrcopy.shift(tshift)
         tlbcopy.shift(tshift)
 
-        tlabel = TextMobject(r"$L_{(7,2)}$")
+        tlabel = TextMobject(r"$K'_{(7,2)}$")
         tlabel.shift(3 * UP)
         tlabel.set_color(BLUE_C)
 
-        bllabel = TextMobject(r"$\sim/\{0,1\}$")
+        bllabel = TextMobject(r"$\pi_{[0 \sim 1]}$")
         bllabel.shift(0.125 * DOWN + 3 * LEFT)
         bllabel.set_color(RED_C)
 
